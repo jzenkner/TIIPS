@@ -1048,7 +1048,7 @@ def main(_):
   num_ground_truth_steps = []
 
   result_json = []
-  max_step_limit = 20
+  max_step_limit = 10
 
   for test_example_index, batch in enumerate(test_dataset.as_numpy_iterator()):
 
