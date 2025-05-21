@@ -1,11 +1,15 @@
 #!/bin/bash
 
-echo "🔍 Searching for identifying info..."
+echo "🔍 Searching for identifying info (excluding notebooks and images)..."
 
-grep -rEi "(author|name|email|university|clausthal|gmail|tu-|lab|group)" .
-grep -rEi "(github|gitlab|http|https|www\.)" .
-grep -rE "(/home/|C:\\\\Users\\\\)" .
-grep -rE "^#.*(author|email|university)" .
-grep -rE "print\(.*(user|author|path|email)" .
+# Search while excluding notebooks and common image formats
+grep -rEi --exclude="*.ipynb" \
+          --exclude="*.png" \
+          --exclude="*.jpg" \
+          --exclude="*.jpeg" \
+          --exclude="*.gif" \
+          --exclude="*.svg" \
+          --exclude-dir=".git" \
+          "(janis|jzenkner|tu-|clausthal|ceph)" .
 
 echo "✅ Done. Review flagged lines manually to ensure double-blind compliance."
