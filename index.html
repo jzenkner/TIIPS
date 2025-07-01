@@ -295,79 +295,32 @@
             If this inductive procedure fails to solve the task entirely, a second model predicts an intermediate output-effectively proposing a decomposition. 
             This intermediate output defines a new PBE subtask, which is then passed back to the inductive procedure. 
             After solving the subtask, the remaining steps of the original task are completed without further transductive guidance.
-<div class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-    
-    <!-- ExeDec Card -->
-    <div class="feature-card" style="display: flex; flex-direction: column;">
-        <div style="flex-grow: 1;">
-            <h3>ExeDec</h3>
-            <p style="margin: 1rem 0;">Explicit task decomposition framework for program synthesis</p>
-            <ul style="list-style: none; margin-top: 1rem; font-size: 0.9rem; color: #666;">
-                <li style="margin-bottom: 0.5rem;">
-                    <span>Subgoal Model</span>
-                    <p style="font-size: 0.85rem; margin-left: 1.5rem; color: #888;">
-                        Decompose a PBE task into a subtask (yielding a new PBE task) by predicting the output of the next subtask.
-                    </p>
-                </li>
-                <li>
-                    <span>Synthesizer Model</span>
-                    <p style="font-size: 0.85rem; margin-left: 1.5rem; color: #888;">
-                        Solve predicted subtask using execution-guided program synthesis.
-                    </p>
-                </li>
-            </ul>
+        <!-- TIIPS Card -->
+        <div class="feature-card" style="display: flex; flex-direction: column;">
+            <div style="flex-grow: 1;">
+                <h3>TIIPS</h3>
+                <p style="margin: 1rem 0;">Transductively Induced Iterative Program Synthesis</p>
+                <ul style="list-style: none; margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                    <li style="margin-bottom: 0.5rem;">
+                        <span>Iterative Synthesis</span>
+                        <p style="font-size: 0.85rem; margin-left: 1.5rem; color: #888;">
+                            A pre-trained Synthesizer iteratively generates subprograms whose execution updates the specification.
+                        </p>
+                    </li>
+                    <li>
+                        <span>Fallback Decomposition</span>
+                        <p style="font-size: 0.85rem; margin-left: 1.5rem; color: #888;">
+                            If iteration fails, a secondary model predicts an intermediate output to decompose the task into a new PBE subtask.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+             <div style="text-align: center;">
+                <img src="images/image.png" alt="Pseudocode" style="height: 400px;">
+            </div>  
         </div>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
-            <span style="font-size: 0.9rem; color: #2c3e50; font-weight: 600;">Workflow:</span>
-            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">Repeat until the task is solved or a maximum step limit is reached:</p>
-            <ol style="font-size: 0.85rem; color: #666; padding-left: 1.2rem; margin-top: 0.3rem;">
-                <li>Subgoal Model predicts the next single-step subtask.</li>
-                <li>Synthesizer Model generates a program for the predicted subtask.</li>
-                <li>The program is executed, and task specifications are updated.</li>
-            </ol>
-        </div>
-    </div>
-
-    <!-- REGISM Card -->
-    <div class="feature-card" style="display: flex; flex-direction: column;">
-        <div style="flex-grow: 1;">
-            <h3>Repeated execution-guided invocation of the Synthesizer Model (REGISM)</h3>
-            <p style="margin: 1rem 0;">Removing the task decomposition step from ExeDec</p>
-            <ul style="list-style: none; margin-top: 1rem; font-size: 0.9rem; color: #666;">
-                <li>
-                    <span><strong>No</strong> Subgoal Model</span>
-                    <p style="font-size: 0.85rem; margin-left: 1.5rem; color: #888;">
-                        Guidance via task decomposition is removed.
-                    </p>
-                </li>
-                <li>
-                    <span>Synthesizer Model</span>
-                    <p style="font-size: 0.85rem; margin-left: 1.5rem; color: #888;">
-                        Solve remaining task using execution-guided program synthesis.
-                    </p>
-                </li>
-            </ul>
-        </div>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
-            <span style="font-size: 0.9rem; color: #2c3e50; font-weight: 600;">Workflow:</span>
-            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">Repeat until the task is solved or a maximum step limit is reached:</p>
-            <ol style="font-size: 0.85rem; color: #666; padding-left: 1.2rem; margin-top: 0.3rem;">
-                <li>Synthesizer Model generates a program based on the current task specification.</li>
-                <li>The program is executed, and task specifications are updated accordingly.</li>
-            </ol>
-            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">
-                <em>Note:</em> Subtasks are only revealed in hindsight through execution.
-            </p>
-        </div>
-    </div>
 
 </div>
-            <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                <h4 style="color: var(--primary-color); margin-bottom: 1rem;">ExeDec Framework</h4>
-                <div style="text-align: center;">
-                    <img src="images/regism_workflow.svg" alt="tuc" style="height: 500px;">
-                </div>
-            </div>
 
         <div style="margin-bottom: 2rem;">
             <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
