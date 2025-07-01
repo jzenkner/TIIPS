@@ -258,22 +258,42 @@
         </section>
 
         <section class="section">
+            <h2>Motivation</h2>
+           <p>
+                Synthesizing programs directly from input-output examples is inherently difficult due to the large search space and the absence of intermediate supervision. 
+                To mitigate this, recent approaches employ <strong>explicit task decomposition</strong>: rather than synthesizing the full program in one step, the task is divided into smaller subtasks that are solved sequentially.
+                This improves both interpretability and synthesis efficiency—but also introduces new challenges, especially when the predicted decompositions are misleading.
+            </p>
+            <p>
+                Recent work 
+                <a href="https://arxiv.org/abs/2411.02272" target="_blank" rel="noopener noreferrer">
+                    (Li et al., 2024)
+                </a> 
+                demonstrates that PBE tasks can be addressed using both <strong>inductive methods</strong> (program synthesis) and <strong>transductive methods</strong> (predicting the output directly via neural networks), and that these strategies are highly complementary.
+                We hypothesize that this complementarity also holds at the <strong>subtask level</strong>: some subtasks are best handled through inductive synthesis, while others benefit from transductive guidance.
+            </p>
+            
             <h2>Programmnig by example</h2>
-            Programming by example (PBE) is a paradigm where a system synthesizes a program based on a small set of input-output examples provided by the user. 
-            Instead of writing code explicitly, the user shows what the program should do, and the system infers a program in a predefined domain-specific language (DSL) that is consistent with the examples. 
-            PBE is widely used in scenarios like string transformation, data cleaning, and end-user programming, where writing code manually is difficult or time-consuming.
+            Programming by Example (PBE) is a paradigm where users specify a program by providing a few input-output examples instead of writing code.
+            The goal is to synthesize a program that is consistent with all provided examples-typically from a domain-specific language (DSL) designed for the task.
             <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                 <h4 style="color: var(--primary-color); margin-bottom: 1rem;">Illustrative PBE task</h4>
                 <a href="https://lab42.global/arc/" target="_blank" rel="noopener noreferrer">
                     <div style="text-align: center;">
-                        <img src="images/ARC-Explanation2.svg" alt="ARC Example" style="height: 500px;">
+                        <img src="images/ARC11.png" alt="Inductive ARC Example" style="height: 200px;">
+                        <img src="images/ARC21.png" alt="Transductive ARC Example" style="height: 200px;">
                     </div>  
                 </a>
             </div>
         </section>
-
         <section class="section">
             <h2>Methodology</h2>
+            We build on this insight by introducing a novel approach: Transductively Induced Iterative Program Synthesis (TIIPS).
+            TIIPS leverages a powerful pre-trained Synthesizer to iteratively generate subprograms, which are executed on the task specification. 
+            The results of each execution are used to update the specification, and the process is repeated for n steps.
+            If this inductive procedure fails to solve the task entirely, a second model predicts an intermediate output-effectively proposing a decomposition. 
+            This intermediate output defines a new PBE subtask, which is then passed back to the inductive procedure. 
+            After solving the subtask, the remaining steps of the original task are completed without further transductive guidance.
 <div class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
     
     <!-- ExeDec Card -->
