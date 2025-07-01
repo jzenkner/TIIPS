@@ -262,7 +262,7 @@
            <p>
                 Synthesizing programs directly from input-output examples is inherently difficult due to the large search space and the absence of intermediate supervision. 
                 To mitigate this, recent approaches employ <strong>explicit task decomposition</strong>: rather than synthesizing the full program in one step, the task is divided into smaller subtasks that are solved sequentially.
-                This improves both interpretability and synthesis efficiency—but also introduces new challenges, especially when the predicted decompositions are misleading.
+                This improves both interpretability and synthesis efficiency-but also introduces new challenges, especially when the predicted decompositions are misleading.
             </p>
             <p>
                 Recent work 
@@ -270,6 +270,7 @@
                     (Li et al., 2024)
                 </a> 
                 demonstrates that PBE tasks can be addressed using both <strong>inductive methods</strong> (program synthesis) and <strong>transductive methods</strong> (predicting the output directly via neural networks), and that these strategies are highly complementary.
+                The below figure illustrates this phenomenon: The left task can be addressed without trandsductive guidance using a loop while the denoising task on the right is easier to solve using transductive guidance.
                 We hypothesize that this complementarity also holds at the <strong>subtask level</strong>: some subtasks are best handled through inductive synthesis, while others benefit from transductive guidance.
             </p>
             
